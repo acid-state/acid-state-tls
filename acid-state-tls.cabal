@@ -12,7 +12,10 @@ Build-type:          Simple
 Cabal-version:       >=1.6
 Extra-source-files:
         examples/*.hs
-        examples/ssl/test.*
+        examples/ssl/test.crt
+        examples/ssl/test.key
+        examples/ssl/test.csr
+        examples/ssl/test.key.org
 
 Source-repository head
   type:          git
