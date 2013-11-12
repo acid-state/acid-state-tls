@@ -1,7 +1,4 @@
-{-# LANGUAGE CPP                 #-}
-{-# LANGUAGE DeriveDataTypeable  #-}
-{-# LANGUAGE RecordWildCards     #-}
-{-# LANGUAGE ScopedTypeVariables #-}
+{-# LANGUAGE CPP, DeriveDataTypeable, RecordWildCards, ScopedTypeVariables #-}
 -----------------------------------------------------------------------------
 {- |
  Module      :  Data.Acid.Remote.TLS
@@ -27,31 +24,23 @@ module Data.Acid.Remote.TLS
 
     ) where
 
-import           Control.Concurrent (forkIO, threadDelay)
-import           Control.Exception  (Handler (..), IOException, SomeException,
-                                     catch, catches, finally, handle, throwIO)
-import           Control.Monad      (forever, when)
-import           Data.Acid          (AcidState, IsAcidic)
-import           Data.Acid.Remote   (CommChannel (..), process,
-                                     processRemoteState, sharedSecretCheck,
-                                     sharedSecretPerform,
-                                     skipAuthenticationCheck,
-                                     skipAuthenticationPerform)
-import           Data.SafeCopy      (SafeCopy)
-import           GHC.IO.Exception   (IOErrorType (..))
-import           Network            (HostName, PortID (..), Socket, listenOn,
-                                     sClose, withSocketsDo)
-import           Network.BSD        (getHostByName, getProtocolNumber,
-                                     getServicePortNumber, hostAddress)
-import           Network.Socket     as Socket (Family (..), SockAddr (..),
-                                               SocketType (..), accept, connect,
-                                               socket)
-import           OpenSSL            (withOpenSSL)
-import           OpenSSL.Session    (SSL, SSLContext, SomeSSLException)
-import qualified OpenSSL.Session    as SSL
-import           System.Directory   (removeFile)
-import           System.IO.Error    (ioeGetErrorType, isDoesNotExistError,
-                                     isFullError)
+import Control.Concurrent        ( forkIO, threadDelay )
+import Control.Exception         ( Handler(..), IOException, SomeException, catch, catches, handle
+                                 , finally, throwIO )
+import Control.Monad             ( forever, when )
+import Data.Acid                 ( AcidState, IsAcidic )
+import Data.Acid.Remote          ( CommChannel(..), process, processRemoteState, skipAuthenticationCheck
+                                 , skipAuthenticationPerform, sharedSecretCheck, sharedSecretPerform )
+import Data.SafeCopy             ( SafeCopy )
+import GHC.IO.Exception          ( IOErrorType(..) )
+import           OpenSSL         ( withOpenSSL )
+import           OpenSSL.Session ( SomeSSLException, SSL, SSLContext )
+import qualified OpenSSL.Session as SSL
+import Network                   ( HostName, PortID(..), Socket, listenOn, sClose, withSocketsDo )
+import Network.Socket            as Socket ( Family(..), SockAddr(..), SocketType(..), accept, socket, connect )
+import Network.BSD               ( getHostByName, getProtocolNumber, getServicePortNumber, hostAddress )
+import System.Directory          ( removeFile )
+import System.IO.Error           ( ioeGetErrorType, isFullError, isDoesNotExistError )
 
 debugStrLn :: String -> IO ()
 debugStrLn s =
