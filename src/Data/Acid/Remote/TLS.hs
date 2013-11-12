@@ -212,6 +212,7 @@ connectToTLS hostName (PortNumber port)
                                          sClose sock
                                          throwIO e
                                )
+#if !defined(mingw32_HOST_OS) && !defined(cygwin32_HOST_OS) && !defined(_WIN32)
 connectToTLS _hostName p@(UnixSocket path)
   = do debugStrLn $ "connectToTLS: " ++ show p
        sock <- socket AF_UNIX Stream 0
@@ -226,4 +227,4 @@ connectToTLS _hostName p@(UnixSocket path)
                                          sClose sock
                                          throwIO e
                                )
-
+#endif
