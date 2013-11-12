@@ -1,5 +1,5 @@
 Name:                acid-state-tls
-Version:             0.9.0
+Version:             0.9.1
 Synopsis:            Add TLS support for Data.Acid.Remote
 Description:         Adds TLS support for connections to remote AcidState databases
 Homepage:            http://acid-state.seize.it/
