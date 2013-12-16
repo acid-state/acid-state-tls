@@ -77,4 +77,4 @@ main
              do acid <- openRemoteStateTLS (sharedSecretPerform $ (pack "12345")) hostname (PortNumber $ fromIntegral $ read port)
                 commandLoop acid
 
-         _ -> putStrLn "Usage: RemoteClientTLS [<hostname> <port>"]
+         _ -> putStrLn "Usage: RemoteClientTLS [<hostname> <port>]"
